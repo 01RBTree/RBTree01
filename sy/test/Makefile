@@ -12,7 +12,7 @@ debug: test-rbtree
 
 test-rbtree: test-rbtree.o ../src/rbtree.o
 
-../src/rbtree.o:
+../src/rbtree.o: ../src/rbtree.c
 	$(MAKE) -C ../src rbtree.o
 
 clean:
