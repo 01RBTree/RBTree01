@@ -20,28 +20,7 @@ rbtree *new_rbtree(void) {
   p->root = nil;
 
 }
-static void free_subtree(rbtree *t,node_t *x){
-  if(x==t->nil) return;
-  free_subtree(t,x->left);
-  free_subtree(t,x->right);
-  free(x);
-}
 
-void delete_rbtree(rbtree *t) {
-  if (!t) return;
-  free_subtree(t,t->root);
-  free(t->nil);
-  free(t);
-}
-
-static node_t *init_new_node(rbtree *t, key_t key) {
-  node_t *z = (node_t *)malloc(sizeof *z);
-  if (!z) return NULL;
-  z->key   = key;
-  z->color = RBTREE_RED;
-  z->left = z->right = z->parent = t->nil;
-  return z;
-}
 
 node_t *rbtree_insert(rbtree *t, const key_t key) {
   // TODO: implement insert
