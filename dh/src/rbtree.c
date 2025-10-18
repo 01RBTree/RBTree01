@@ -20,6 +20,12 @@ rbtree *new_rbtree(void) {
   p->root = nil;
 
 }
+static void free_subtree(rbtree *t,node_t *x){
+  if(x==t->nil) return;
+  free_subtree(t,x->left);
+  free_subtree(t,x->right);
+  free(x);
+}
 
 
 node_t *rbtree_insert(rbtree *t, const key_t key) {
