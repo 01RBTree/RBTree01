@@ -28,7 +28,9 @@ static void free_subtree(rbtree *t,node_t *x){
 }
 
 void delete_rbtree(rbtree *t) {
-  // TODO: reclaim the tree nodes's memory
+  if (!t) return;
+  free_subtree(t,t->root);
+  free(t->nil);
   free(t);
 }
 
