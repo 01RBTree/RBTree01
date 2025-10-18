@@ -4,6 +4,10 @@
 
 rbtree* new_rbtree(void) {
     rbtree* p = (rbtree*)calloc(1, sizeof(rbtree));
+    // MEMO: calloc은 조명하는 메모리 공간의 모든 비트를 0으로 초기화한다.
+    // 해당 영역의 데이터를 읽는 관점에 따라 0이고,
+    // 주소값으로 해석한다면 NULL이다.
+    // 그래서 테스트에 통과한다.
     // TODO: initialize struct if needed
     return p;
 }
