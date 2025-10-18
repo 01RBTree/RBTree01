@@ -61,3 +61,4 @@ dkms.conf
 
 # 개인용 설정파일 등
 .local
+compile_commands.json
