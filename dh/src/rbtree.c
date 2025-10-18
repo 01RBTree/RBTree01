@@ -27,6 +27,13 @@ static void free_subtree(rbtree *t,node_t *x){
   free(x);
 }
 
+void delete_rbtree(rbtree *t) {
+  if (!t) return;
+  free_subtree(t,t->root);
+  free(t->nil);
+  free(t);
+}
+
 
 node_t *rbtree_insert(rbtree *t, const key_t key) {
   // TODO: implement insert
