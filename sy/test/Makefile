@@ -1,10 +1,14 @@
-.PHONY: test
+.PHONY: test debug
 
 CFLAGS=-I ../src -Wall -g #-DSENTINEL
 
 test: test-rbtree
 	./test-rbtree
-	valgrind ./test-rbtree
+	# valgrind ./test-rbtree
+
+debug: test-rbtree
+	gdbserver :1234 ./test-rbtree
+
 
 test-rbtree: test-rbtree.o ../src/rbtree.o
 

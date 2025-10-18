@@ -1,5 +1,5 @@
 session_name: jg-W6
-start_directory: /home/sy/jg/03.c-language/me/w6_RBTree01
+start_directory: /home/sy/jg/03.c-language/me/w6_RBTree01/sy
 suppress_history: false
 windows:
   - window_name: document
@@ -21,7 +21,6 @@ windows:
             enter: false
 
   - window_name: debug
-    start_directory: src
     panes:
       - shell_command:
           - tm.1_title 'debugger'
@@ -36,21 +35,20 @@ windows:
       - shell_command:
           - tm.1_title 'current container'
           - docker exec -it jg-c-w6 bash
-          - cmd: "gdbserver :1234 hello "
-            enter: false
+          - make help
         focus: true
-      - shell_command: vi .local/config/Dockerfile
+      - shell_command: vi config/Dockerfile
       - shell_command:
           - tm.1_title 'build image'
           - cmd: docker build -t jg-c-w6 config/
             enter: false
       - shell_command:
           - tm.1_title 'run daemon container'
-          - cmd: docker run -d --name jg-c-w6 -v "$(git-root)/src:/workspace" --network=host jg-c-w6
+          - cmd: docker run -d --name jg-c-w6 -v "$(git-root)/sy:/workspace" --network=host jg-c-w6
             enter: false
       - shell_command: lazydocker
 
   - window_name: config
     layout: even-horizontal
     panes:
-      - shell_command: vi .local/config/tmuxp.yaml
+      - shell_command: vi config/tmuxp.yaml

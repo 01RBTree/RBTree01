@@ -2,7 +2,7 @@
 FROM ubuntu:22.04
 
 # Install dependencies if needed
-RUN apt-get update && apt-get install -y build-essential gdbserver
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gdbserver valgrind make
 
 # Set the working directory to /workspace
 WORKDIR /workspace
