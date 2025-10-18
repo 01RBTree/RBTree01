@@ -1,0 +1,32 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I",
+      "../src",
+      "-Wall",
+      "-g",
+      "-c",
+      "-o",
+      "test-rbtree.o",
+      "test-rbtree.c"
+    ],
+    "directory": "/home/sy/jg/03.c-language/me/w6_RBTree01/test",
+    "file": "/home/sy/jg/03.c-language/me/w6_RBTree01/test/test-rbtree.c",
+    "output": "/home/sy/jg/03.c-language/me/w6_RBTree01/test/test-rbtree.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-g",
+      "-c",
+      "-o",
+      "rbtree.o",
+      "rbtree.c"
+    ],
+    "directory": "/home/sy/jg/03.c-language/me/w6_RBTree01/src",
+    "file": "/home/sy/jg/03.c-language/me/w6_RBTree01/src/rbtree.c",
+    "output": "/home/sy/jg/03.c-language/me/w6_RBTree01/src/rbtree.o"
+  }
+]
