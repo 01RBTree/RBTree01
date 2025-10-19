@@ -17,15 +17,22 @@ void delete_rbtree(rbtree* t) {
     free(t);
 }
 
-node_t* rbtree_insert(rbtree* t, const key_t key) {
+node_t* new_node(const key_t key) {
     node_t* newNode = (node_t*)malloc(sizeof(node_t));
     newNode->color = RBTREE_RED;
     newNode->key = key;
     newNode->parent = NULL;
     newNode->left = NULL;
     newNode->right = NULL;
-    t->root = newNode;
-    return t->root;
+
+    return newNode;
+}
+
+node_t* rbtree_insert(rbtree* t, const key_t key) {
+    if (!t->root) {
+        t->root = new_node(key);
+        return t->root;
+    }
 }
 
 node_t* rbtree_find(const rbtree* t, const key_t key) {
