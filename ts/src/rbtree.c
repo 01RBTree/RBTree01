@@ -186,3 +186,26 @@ node_t* rbtree_insert (rbtree *t, const key_t key)
   
     return t -> root;
   }
+
+  node_t *rbtree_find(const rbtree *t, const key_t key) 
+{  
+  node_t* ptr = t -> root;
+
+  if(ptr == t -> nil)
+  return NULL;
+
+ while(ptr != t -> nil)
+ {
+    if(ptr -> key == key)
+    return ptr;
+    else
+    {
+      if(ptr -> key > key)
+      ptr = ptr -> left;
+      else
+      ptr = ptr -> right;
+    }
+ }
+
+  return NULL;
+}
