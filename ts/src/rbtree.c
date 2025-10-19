@@ -1,44 +1,25 @@
 #include "rbtree.h"
-
 #include <stdlib.h>
+#include <assert.h>
 
-rbtree *new_rbtree(void) {
-  rbtree *p = (rbtree *)calloc(1, sizeof(rbtree));
-  // TODO: initialize struct if needed
+rbtree* new_rbtree (void) 
+{
+  rbtree *p = (rbtree *)calloc(1, sizeof(rbtree)); 
+  node_t * Sentinel_Nil = (node_t *)malloc(sizeof(node_t)); // 센티널 노드 선언
+
+  if(p == NULL || Sentinel_Nil == NULL) // 둘 중 하나라도 메모리 할당 실패 시 강제 종료
+  assert(0);
+
+  // 센티널 노드 초기화
+  Sentinel_Nil -> color = RBTREE_BLACK;
+  Sentinel_Nil-> key = -1;
+  Sentinel_Nil-> left = Sentinel_Nil;
+  Sentinel_Nil-> right = Sentinel_Nil;
+  Sentinel_Nil-> parent = Sentinel_Nil;
+   
+ // 할당한 RB tree 초기화
+  p->nil = Sentinel_Nil;
+  p->root = p -> nil;
+  
   return p;
-}
-
-void delete_rbtree(rbtree *t) {
-  // TODO: reclaim the tree nodes's memory
-  free(t);
-}
-
-node_t *rbtree_insert(rbtree *t, const key_t key) {
-  // TODO: implement insert
-  return t->root;
-}
-
-node_t *rbtree_find(const rbtree *t, const key_t key) {
-  // TODO: implement find
-  return t->root;
-}
-
-node_t *rbtree_min(const rbtree *t) {
-  // TODO: implement find
-  return t->root;
-}
-
-node_t *rbtree_max(const rbtree *t) {
-  // TODO: implement find
-  return t->root;
-}
-
-int rbtree_erase(rbtree *t, node_t *p) {
-  // TODO: implement erase
-  return 0;
-}
-
-int rbtree_to_array(const rbtree *t, key_t *arr, const size_t n) {
-  // TODO: implement to_array
-  return 0;
 }
