@@ -28,6 +28,16 @@ node_t* new_node(const key_t key) {
     return newNode;
 }
 
+node_t* create_child(node_t* parent, node_t* new_node, child_side_t side) {
+    new_node->parent = parent;
+    if (side == LEFT_CHILD)
+        parent->left = new_node;
+    else
+        parent->right = new_node;
+
+    return new_node;
+}
+
 node_t* rbtree_insert(rbtree* t, const key_t key) {
     if (!t->root) {
         t->root = new_node(key);

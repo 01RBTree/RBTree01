@@ -4,6 +4,7 @@
 #include <stddef.h>
 
 typedef enum { RBTREE_RED, RBTREE_BLACK } color_t;
+typedef enum { LEFT_CHILD, RIGHT_CHILD } child_side_t;
 
 typedef int key_t;
 
