@@ -48,6 +48,25 @@ node_t* rbtree_insert(rbtree* t, const key_t key) {
     //      - 동일한 값은 오른쪽 자식으로 자리잡는다.
     // 2. 조건 확인
     // 3. 조건 대응
+
+    node_t* parent = t->root;
+    child_side_t child_side = RIGHT_CHILD;
+    while (parent) {
+        if (parent->key <= key) {  // right subtree
+            if (!parent->right) {  // right side empty?
+                child_side = RIGHT_CHILD;
+                break;
+            }
+            parent = parent->right;
+        } else {  // 좌측이동
+            if (!parent->left) {
+                child_side = LEFT_CHILD;
+                break;
+            }
+            parent = parent->left;
+        }
+    }
+    return create_child(parent, new_node(key), child_side);
 }
 
 node_t* rbtree_find(const rbtree* t, const key_t key) {
