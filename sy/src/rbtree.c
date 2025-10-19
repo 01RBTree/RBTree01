@@ -33,6 +33,11 @@ node_t* rbtree_insert(rbtree* t, const key_t key) {
         t->root = new_node(key);
         return t->root;
     }
+    // PSEUDO_CODE:
+    // 1. 자리 찾기
+    //      - 동일한 값은 오른쪽 자식으로 자리잡는다.
+    // 2. 조건 확인
+    // 3. 조건 대응
 }
 
 node_t* rbtree_find(const rbtree* t, const key_t key) {
