@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
+void inorder_search (const rbtree* , const node_t* , int* , int* , int);
+
 rbtree* new_rbtree (void) 
 {
   rbtree *p = (rbtree *)calloc(1, sizeof(rbtree)); 
@@ -236,4 +238,21 @@ node_t *rbtree_max(const rbtree *t) {
  ptr = ptr -> right;
 
   return ptr;
+}
+
+int rbtree_to_array(const rbtree *t, key_t *arr, const size_t n) 
+{
+  int index = 0;
+  inorder_search(t, t -> root, arr, &index, n);
+  return 0;
+}
+
+void inorder_search (const rbtree* t, const node_t* root, int* arr, int* index, int size_n)
+{
+  if(*index == size_n) return;
+  if(root == t -> nil) return;
+
+  inorder_search(t, root -> left, arr, index, size_n);
+  arr[(*index)++] = root -> key;
+  inorder_search(t, root -> right, arr, index, size_n);
 }
