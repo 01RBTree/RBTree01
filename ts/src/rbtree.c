@@ -3,6 +3,7 @@
 #include <assert.h>
 
 void inorder_search (const rbtree* , const node_t* , int* , int* , int);
+void delete_node_postorder (const rbtree*, node_t*);
 
 rbtree* new_rbtree (void) 
 {
@@ -255,4 +256,30 @@ void inorder_search (const rbtree* t, const node_t* root, int* arr, int* index, 
   inorder_search(t, root -> left, arr, index, size_n);
   arr[(*index)++] = root -> key;
   inorder_search(t, root -> right, arr, index, size_n);
+}
+
+void delete_node_postorder (const rbtree* t, node_t* ptr)
+{
+  if(ptr == t -> nil)
+  return;
+
+  delete_node_postorder(t, ptr -> left);
+  delete_node_postorder(t, ptr -> right);
+  free(ptr);
+}
+
+void delete_rbtree (rbtree *t) 
+{ 
+  if(t == NULL)
+  return;
+
+  delete_node_postorder(t, t -> root);
+  free(t -> nil);
+
+  t-> root = NULL;
+  t -> nil = NULL;
+
+  if(t -> root == NULL && t -> nil == NULL)
+  free(t);
+  return;
 }
