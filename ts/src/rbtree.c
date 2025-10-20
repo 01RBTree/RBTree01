@@ -223,3 +223,17 @@ node_t *rbtree_min(const rbtree *t) {
 
   return ptr;
 }
+
+node_t *rbtree_max(const rbtree *t) {
+  // TODO: implement find
+  assert(t != NULL || t -> root == t -> nil);
+  node_t* ptr = t -> root;
+
+  if(ptr == t -> nil)
+  return NULL;
+
+ while(ptr -> right != t -> nil)
+ ptr = ptr -> right;
+
+  return ptr;
+}
