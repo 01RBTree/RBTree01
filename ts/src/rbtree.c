@@ -209,3 +209,17 @@ node_t* rbtree_insert (rbtree *t, const key_t key)
 
   return NULL;
 }
+
+node_t *rbtree_min(const rbtree *t) {
+  // TODO: implement find
+  assert(t != NULL || t -> root == t -> nil);
+  node_t* ptr = t -> root;
+
+  if(ptr == t -> nil)
+  return NULL;
+
+  while(ptr -> left != t -> nil)
+  ptr = ptr -> left;
+
+  return ptr;
+}
