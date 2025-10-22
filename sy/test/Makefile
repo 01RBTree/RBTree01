@@ -10,10 +10,13 @@ debug: test-rbtree
 	gdbserver :1234 ./test-rbtree
 
 
-test-rbtree: test-rbtree.o ../src/rbtree.o
+test-rbtree: test-rbtree.o ../src/rbtree.o ../src/utils.o
 
 ../src/rbtree.o: ../src/rbtree.c
 	$(MAKE) -C ../src rbtree.o
+
+../src/utils.o: ../src/utils.c
+	$(MAKE) -C ../src utils.o
 
 clean:
 	rm -f test-rbtree *.o
