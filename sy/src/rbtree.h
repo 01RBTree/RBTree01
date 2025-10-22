@@ -31,6 +31,12 @@ int rbtree_erase(rbtree*, node_t*);
 int rbtree_to_array(const rbtree*, key_t*, const size_t);
 
 // utils
+node_t* new_node(const key_t);
+node_t* create_child(node_t*, node_t*, child_side_t);
+node_t* grandparent(node_t*);
+node_t* uncle(node_t*);
+void rotate_left(node_t*, rbtree*);
+void rotate_right(node_t*, rbtree*);
 void follow_rule_1(node_t*, rbtree*);
 void follow_rule_2(node_t*, rbtree*);
 void follow_rule_3(node_t*, rbtree*);
