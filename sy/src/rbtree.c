@@ -56,17 +56,14 @@ node_t* uncle(node_t* node) {
 }
 
 node_t* rbtree_insert(rbtree* t, const key_t key) {
+    // PSEUDO_CODE:: if empty tree
     if (!t->root) {
         t->root = new_node(key);
         t->root->color = RBTREE_BLACK;
         return t->root;
     }
-    // PSEUDO_CODE:
-    // 1. 자리 찾기
-    //      - 동일한 값은 오른쪽 자식으로 자리잡는다.
-    // 2. 조건 확인
-    // 3. 조건 대응
 
+    // PSEUDO_CODE:: find and insert (right-child if same key)
     node_t* parent = t->root;
     child_side_t childSide = RIGHT_CHILD;
     while (parent) {
@@ -84,7 +81,9 @@ node_t* rbtree_insert(rbtree* t, const key_t key) {
             parent = parent->left;
         }
     }
-    return create_child(parent, new_node(key), child_side);
+    node_t* newNode = create_child(parent, new_node(key), childSide);
+
+    // PSEUDO_CODE:: 조건 확인 & 조건 대응
 }
 
 node_t* rbtree_find(const rbtree* t, const key_t key) {
