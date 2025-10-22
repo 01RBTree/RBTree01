@@ -50,17 +50,17 @@ node_t* rbtree_insert(rbtree* t, const key_t key) {
     // 3. 조건 대응
 
     node_t* parent = t->root;
-    child_side_t child_side = RIGHT_CHILD;
+    child_side_t childSide = RIGHT_CHILD;
     while (parent) {
         if (parent->key <= key) {  // right subtree
             if (!parent->right) {  // right side empty?
-                child_side = RIGHT_CHILD;
+                childSide = RIGHT_CHILD;
                 break;
             }
             parent = parent->right;
         } else {  // 좌측이동
             if (!parent->left) {
-                child_side = LEFT_CHILD;
+                childSide = LEFT_CHILD;
                 break;
             }
             parent = parent->left;
