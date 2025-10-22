@@ -30,4 +30,11 @@ int rbtree_erase(rbtree*, node_t*);
 
 int rbtree_to_array(const rbtree*, key_t*, const size_t);
 
+// utils
+void follow_rule_1(node_t*, rbtree*);
+void follow_rule_2(node_t*, rbtree*);
+void follow_rule_3(node_t*, rbtree*);
+void follow_rule_4(node_t*, rbtree*);
+void follow_rule_5(node_t*, rbtree*);
+
 #endif  // _RBTREE_H_
