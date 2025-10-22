@@ -38,6 +38,23 @@ node_t* create_child(node_t* parent, node_t* new_node, child_side_t side) {
     return new_node;
 }
 
+node_t* grandparent(node_t* node) {
+    if (node && node->parent)
+        return node->parent->parent;
+    else
+        return NULL;
+}
+
+node_t* uncle(node_t* node) {
+    node_t* g = grandparent(node);
+
+    if (!g) return NULL;
+    if (g->parent == g->left)
+        return g->right;
+    else
+        return g->left;
+}
+
 node_t* rbtree_insert(rbtree* t, const key_t key) {
     if (!t->root) {
         t->root = new_node(key);
