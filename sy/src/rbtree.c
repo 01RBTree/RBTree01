@@ -58,6 +58,7 @@ node_t* uncle(node_t* node) {
 node_t* rbtree_insert(rbtree* t, const key_t key) {
     if (!t->root) {
         t->root = new_node(key);
+        t->root->color = RBTREE_BLACK;
         return t->root;
     }
     // PSEUDO_CODE:
