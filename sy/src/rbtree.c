@@ -80,7 +80,41 @@ node_t* rbtree_max(const rbtree* t) {
 }
 
 int rbtree_erase(rbtree* t, node_t* p) {
-    // TODO: implement erase
+    if (!p) return -1;
+
+    node_t* to_delete = p;
+
+    // Case 1: Node has two children
+    if (p->left && p->right) {
+        node_t* successor = rbtree_min(p->right);
+        // Swap key and color
+        key_t temp_key = p->key;
+        color_t temp_color = p->color;
+        p->key = successor->key;
+        p->color = successor->color;
+        successor->key = temp_key;
+        successor->color = temp_color;
+        to_delete = successor;  // narrow down to one-child case
+    }
+
+    // subtree의 최소 또는 최대값 골랐으니 이제 어차피 하나 남음
+    // 둘다 없는 경우 알아서 NULL
+    node_t* child = to_delete->left ? to_delete->left : to_delete->right;
+    color_t original_color = to_delete->color;
+
+    // 삭제: 부모 -> 자식 연결
+    if (to_delete->parent) {
+        if (to_delete == to_delete->parent->left)
+            to_delete->parent->left = child;
+        else
+            to_delete->parent->right = child;
+    } else {
+        t->root = child;
+    }
+    // 삭제: 자식 -> 부모 연결
+    if (child) child->parent = to_delete->parent;
+
+    free(to_delete);
     return 0;
 }
 
