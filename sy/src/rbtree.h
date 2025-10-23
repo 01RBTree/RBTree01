@@ -42,5 +42,6 @@ void follow_rule_2(node_t*, rbtree*);
 void follow_rule_3(node_t*, rbtree*);
 void follow_rule_4(node_t*, rbtree*);
 void follow_rule_5(node_t*, rbtree*);
+node_t* rbtree_min_from_node(node_t*);
 
 #endif  // _RBTREE_H_

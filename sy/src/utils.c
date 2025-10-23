@@ -136,3 +136,10 @@ void follow_rule_5(node_t* n, rbtree* t) {
     else
         rotate_left(g, t);
 }
+
+node_t* rbtree_min_from_node(node_t* root) {
+    node_t* curNode = root;
+    if (!curNode) return NULL;
+    while (curNode->left) curNode = curNode->left;
+    return curNode;
+}

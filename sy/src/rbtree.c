@@ -86,7 +86,7 @@ int rbtree_erase(rbtree* t, node_t* p) {
 
     // Case 1: Node has two children
     if (p->left && p->right) {
-        node_t* successor = rbtree_min(p->right);
+        node_t* successor = rbtree_min_from_node(p->right);
         // Swap key and color
         key_t temp_key = p->key;
         color_t temp_color = p->color;
