@@ -115,6 +115,33 @@ int rbtree_erase(rbtree* t, node_t* p) {
     if (child) child->parent = to_delete->parent;
 
     free(to_delete);
+
+    // Rebalance if to_delete was black
+    // PSEUDO_CODE:
+    // 1. while (child != root && (child == NULL || child->color == BLACK)):
+    //     - Case 1: 형제(sibling)가 RED
+    //       - 부모를 RED로, 형제를 BLACK으로
+    //       - 부모 기준으로 rotate
+    //       - sibling을 새로 갱신
+    //     - Case 2: 형제와 형제의 두 자식 모두 BLACK
+    //       - 형제를 RED로
+    //       - child를 부모로 올림
+    //     - Case 3: 형제는 BLACK, 형제의 왼쪽 자식만 RED, 오른쪽 자식은
+    // BLACK
+    //       - 형제의 왼쪽 자식을 BLACK, 형제를 RED로
+    //       - 형제 기준으로 rotate
+    //       - sibling을 새로 갱신
+    //     - Case 4: 형제는 BLACK, 형제의 오른쪽 자식이 RED
+    //       - 형제의 색을 부모의 색으로
+    //       - 부모와 형제의 오른쪽 자식을 BLACK으로
+    //       - 부모 기준으로 rotate
+    //       - child를 root로 설정 (종료)
+    //
+    // 2. child가 NULL이 아니면 BLACK으로 칠함
+
+    if (original_color == RBTREE_BLACK)
+        rbtree_erase_fixup(t, child, to_delete->parent);
+
     return 0;
 }
 

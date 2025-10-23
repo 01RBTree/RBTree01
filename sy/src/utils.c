@@ -143,3 +143,89 @@ node_t* rbtree_min_from_node(node_t* root) {
     while (curNode->left) curNode = curNode->left;
     return curNode;
 }
+
+void rbtree_erase_fixup(rbtree* t, node_t* child, node_t* parent) {
+    while (child != t->root &&
+           (child == NULL || child->color == RBTREE_BLACK)) {
+        // 1. child가 왼쪽 자식인 경우
+        if (child == parent->left) {
+            node_t* sibling = parent->right;
+            // Case 1: 형제(sibling)가 RED
+            if (sibling && sibling->color == RBTREE_RED) {
+                sibling->color = RBTREE_BLACK;
+                parent->color = RBTREE_RED;
+                rotate_left(parent, t);
+                sibling = parent->right;  // sibling 갱신
+            }
+            // Case 2: 형제와 형제의 두 자식 모두 BLACK
+            // leaf node인 경우도 포함
+            if (sibling &&
+                (!sibling->left || sibling->left->color == RBTREE_BLACK) &&
+                (!sibling->right || sibling->right->color == RBTREE_BLACK)) {
+                sibling->color = RBTREE_RED;
+                child = parent;  // child 갱신
+                parent = parent->parent;
+                continue;
+            }
+            // Case 3: 형제가 BLACK, 왼쪽만 RED, 오른쪽은 BLACK(leaf node okay)
+            if (sibling && sibling->color == RBTREE_BLACK && sibling->left &&
+                sibling->left->color == RBTREE_RED &&
+                (!sibling->right || sibling->right->color == RBTREE_BLACK)) {
+                sibling->left->color = RBTREE_BLACK;
+                sibling->color = RBTREE_RED;
+                rotate_right(sibling, t);
+                sibling = parent->right;  // sibling 갱신
+            }
+            // Case 4: 형제가 BLACK, 오른쪽 자식이 RED
+            if (sibling && sibling->color == RBTREE_BLACK && sibling->right &&
+                sibling->right->color == RBTREE_RED) {
+                sibling->color = parent->color;
+                parent->color = RBTREE_BLACK;
+                sibling->right->color = RBTREE_BLACK;
+                rotate_left(parent, t);
+                child = t->root;  // child를 root로
+                break;
+            }
+        } else {
+            // 오른쪽 자식인 경우는 좌우 대칭으로
+            node_t* sibling = parent->left;
+            // Case 1:
+            if (sibling && sibling->color == RBTREE_RED) {
+                sibling->color = RBTREE_BLACK;
+                parent->color = RBTREE_RED;
+                rotate_right(parent, t);
+                sibling = parent->left;
+            }
+            // Case 2:
+            if (sibling &&
+                (!sibling->left || sibling->left->color == RBTREE_BLACK) &&
+                (!sibling->right || sibling->right->color == RBTREE_BLACK)) {
+                sibling->color = RBTREE_RED;
+                child = parent;
+                parent = parent->parent;
+                continue;
+            }
+            // Case 3:
+            if (sibling && sibling->color == RBTREE_BLACK && sibling->right &&
+                sibling->right->color == RBTREE_RED &&
+                (!sibling->left || sibling->left->color == RBTREE_BLACK)) {
+                sibling->right->color = RBTREE_BLACK;
+                sibling->color = RBTREE_RED;
+                rotate_left(sibling, t);
+                sibling = parent->left;
+            }
+            // Case 4:
+            if (sibling && sibling->color == RBTREE_BLACK && sibling->left &&
+                sibling->left->color == RBTREE_RED) {
+                sibling->color = parent->color;
+                parent->color = RBTREE_BLACK;
+                sibling->left->color = RBTREE_BLACK;
+                rotate_right(parent, t);
+                child = t->root;
+                break;
+            }
+        }
+    }
+
+    if (child) child->color = RBTREE_BLACK;
+}
